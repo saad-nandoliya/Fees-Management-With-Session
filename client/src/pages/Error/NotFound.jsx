@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-100 dark:bg-neutral-900 text-center px-4">
+    <div className="  flex flex-col items-center justify-center bg-neutral-100 dark:bg-neutral-900 text-center py-16 sm:py-20 ">
       {/* Shake animation using Tailwind's inline custom keyframes */}
       <div
         className="text-8xl mb-6 animate-[shake_0.5s_ease-in-out_infinite]"
@@ -26,7 +26,7 @@ const NotFound = () => {
       </p>
       <Link
         to="/"
-        className="px-6 py-3 bg-blue-600 text-white text-sm font-semibold rounded-full hover:bg-blue-700 transition"
+        className="px-6 py-3 bg-amber-300  text-sm font-semibold rounded-full hover:bg-amber-400 transition"
       >
         🔙 Go Back Home
       </Link>

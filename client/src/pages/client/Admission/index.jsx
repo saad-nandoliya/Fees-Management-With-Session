@@ -1,10 +1,10 @@
 import React from "react";
 import AdmissionForm from "./AdmissionForm";
 
-const index = () => {
+const index = ({ sessionYear, classes }) => {
   return (
     <>
-      <AdmissionForm />
+      <AdmissionForm sessionYear={sessionYear} classes={classes}/>
     </>
   );
 };

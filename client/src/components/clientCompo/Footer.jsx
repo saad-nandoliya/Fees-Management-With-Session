@@ -14,7 +14,7 @@ const Footer = () => {
     { arrow: <IoIosArrowForward />, name: "Gallery", path: "/gallery" },
     { arrow: <IoIosArrowForward />, name: "Contact Us", path: "/contact" },
     { arrow: <IoIosArrowForward />, name: "Management", path: "/management" },
-    { arrow: <IoIosArrowForward />, name: "Student's", path: "/students" },
+    { arrow: <IoIosArrowForward />, name: "Student's", path: "/studentlist" },
   ];
 
   return (

@@ -11,7 +11,7 @@ const Header = () => {
     { name: "Gallery", path: "/gallery" },
     { name: "Contact Us", path: "/contact" },
     { name: "Management", path: "/management" },
-    { name: "Student's", path: "/students" },
+    { name: "Student's", path: "/studentlist" },
   ];
 
   return (
@@ -51,9 +51,8 @@ const Header = () => {
             className="transition-transform duration-300"
           >
             <div
-              className={`transform transition-transform duration-400 ${
-                isOpen ? "-rotate-90" : "rotate-0"
-              }`}
+              className={`transform transition-transform duration-400 ${isOpen ? "-rotate-90" : "rotate-0"
+                }`}
             >
               <IoIosArrowBack />
             </div>
@@ -62,11 +61,10 @@ const Header = () => {
 
         {/* SIDE NAV for mobile */}
         <div
-          className={`flex flex-col md:hidden px-4 gap-4 font-medium transition-all duration-600 ease-in-out overflow-hidden ${
-            isOpen
+          className={`flex flex-col md:hidden px-4 gap-4 font-medium transition-all duration-600 ease-in-out overflow-hidden ${isOpen
               ? "max-h-[400px] opacity-100 scale-100"
               : "max-h-0 opacity-0 scale-95"
-          }`}
+            }`}
         >
           {navLinks.map((link, idx) => (
             <NavLink

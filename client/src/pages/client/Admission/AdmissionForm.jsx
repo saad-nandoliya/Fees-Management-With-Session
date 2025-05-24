@@ -4,17 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MCL from "../../../assets/images/mahi-school-logo.png";
+import { useSessionClass } from "../../../context/YearsAndClasses/YearsAndClasses";
 
 const URL = import.meta.env.VITE_URL;
 
 const AdmissionForm = () => {
+  const { sessionYear, classes, sectionList } = useSessionClass();
   const navigate = useNavigate();
+
   const [studentData, setStudentData] = useState({
     student_name: "",
     father_name: "",
     city: "",
     state: "",
     class_name: "",
+    section: "",
     date_of_birth: "",
     mobile_number: "",
     session_year: "",
@@ -36,6 +40,7 @@ const AdmissionForm = () => {
       city,
       state,
       class_name,
+      section,
       date_of_birth,
       mobile_number,
       session_year,
@@ -59,6 +64,8 @@ const AdmissionForm = () => {
       newErrors.state = "Only letters and spaces allowed.";
     } else if (!class_name.trim()) {
       newErrors.class_name = "Class is required.";
+    } else if (!section.trim()) {
+      newErrors.section = "Section is required.";
     } else if (!date_of_birth) {
       newErrors.date_of_birth = "Date of birth is required.";
     } else if (!/^\d{10}$/.test(mobile_number)) {
@@ -87,6 +94,7 @@ const AdmissionForm = () => {
           city: "",
           state: "",
           class_name: "",
+          section: "",
           date_of_birth: "",
           mobile_number: "",
           session_year: "",
@@ -204,30 +212,41 @@ const AdmissionForm = () => {
               {/* Class */}
               <div>
                 <label className="block text-gray-700 font-medium mb-1">Class</label>
-                <input
-                  type="text"
+                <select
                   name="class_name"
                   value={studentData.class_name}
                   onChange={handleChange}
-                  placeholder="e.g. 1st, 5th"
                   className="w-full border rounded-lg px-4 py-2"
-                />
+                >
+                  <option value="">Select Class</option>
+                  {classes?.map((STD) => (
+                    <option key={STD.id} value={STD.class_name}>
+                      {STD.class_name}
+                    </option>
+                  ))}
+                </select>
                 {errors.class_name && (
                   <p className="text-red-500 text-sm mt-1">{errors.class_name}</p>
                 )}
               </div>
               {/* DOB */}
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Date of Birth</label>
-                <input
-                  type="date"
-                  name="date_of_birth"
-                  value={studentData.date_of_birth}
+                <label className="block text-gray-700 font-medium mb-1">Section</label>
+                <select
+                  name="section"
+                  value={studentData.section}
                   onChange={handleChange}
                   className="w-full border rounded-lg px-4 py-2"
-                />
-                {errors.date_of_birth && (
-                  <p className="text-red-500 text-sm mt-1">{errors.date_of_birth}</p>
+                >
+                  <option value="">Select Section</option>
+                  {sectionList?.map((section) => (
+                    <option key={section.id} value={section.section_name}>
+                      {section.section_name}
+                    </option>
+                  ))}
+                </select>
+                {errors.section && (
+                  <p className="text-red-500 text-sm mt-1">{errors.section}</p>
                 )}
               </div>
             </div>
@@ -250,24 +269,42 @@ const AdmissionForm = () => {
                   <p className="text-red-500 text-sm mt-1">{errors.mobile_number}</p>
                 )}
               </div>
-              {/* Session Year (Last Column Alone) */}
+
+              {/* DOB */}
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Session Year</label>
-                <select
-                  name="session_year"
-                  value={studentData.session_year}
+                <label className="block text-gray-700 font-medium mb-1">Date of Birth</label>
+                <input
+                  type="date"
+                  name="date_of_birth"
+                  value={studentData.date_of_birth}
                   onChange={handleChange}
                   className="w-full border rounded-lg px-4 py-2"
-                >
-                  <option value="">Select year</option>
-                  <option value="2024">2024</option>
-                  <option value="2025">2025</option>
-                  <option value="2026">2026</option>
-                </select>
-                {errors.session_year && (
-                  <p className="text-red-500 text-sm mt-1">{errors.session_year}</p>
+                />
+                {errors.date_of_birth && (
+                  <p className="text-red-500 text-sm mt-1">{errors.date_of_birth}</p>
                 )}
               </div>
+
+            </div>
+            {/* Session Year (Last Column Alone) */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">Session Year</label>
+              <select
+                name="session_year"
+                value={studentData.session_year}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2"
+              >
+                <option value="">Select year</option>
+                {sessionYear?.map((session) => (
+                  <option key={session.id} value={session.year}>
+                    {session.year}
+                  </option>
+                ))}
+              </select>
+              {errors.session_year && (
+                <p className="text-red-500 text-sm mt-1">{errors.session_year}</p>
+              )}
             </div>
 
 

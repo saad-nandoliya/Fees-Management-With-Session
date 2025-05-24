@@ -9,7 +9,8 @@ const URL = process.env.URL;
 
 const db = require("./connection/db");
 const studentAdmission = require("./routes/admissionRoute/studentAdmissionRoute")
-
+const adminLogin = require("./routes/loginRoute/AdminLoginRoute")
+const promoteStudentRoutes = require('./routes/promoteStudentRoute/promoteStudentRoute');
 
 
 
@@ -18,6 +19,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/", studentAdmission)
+app.use("/", adminLogin)
+app.use("/", promoteStudentRoutes);
 
 
 

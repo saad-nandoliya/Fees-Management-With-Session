@@ -28,7 +28,7 @@ const SidebarStudentInfo = ({ icon, title, items, isOpen, onToggle, onCloseSideb
       </li>
 
       <ul
-        className={`pl-5 pr-2 transition-all duration-500 ease-in-out overflow-hidden ${
+        className={`pl-5 pr-2 transition-all duration-500 ease-in-out overflow-hidden bg-[#3191ba] ${
           isOpen
             ? "max-h-[300px] opacity-100 scale-100"
             : "max-h-0 opacity-0 scale-95"
@@ -37,7 +37,7 @@ const SidebarStudentInfo = ({ icon, title, items, isOpen, onToggle, onCloseSideb
         {items.map((item, index) => (
           <li
             key={index}
-            className="py-[5px] rounded-md cursor-pointer hover:text-amber-300 flex items-center gap-2"
+            className="py-[5px] rounded-md cursor-pointer hover:text-amber-300 flex items-center gap-2 "
           >
             <NavLink
               to={`/admin/dashboard/${item.path}`}

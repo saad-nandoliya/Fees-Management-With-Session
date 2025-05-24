@@ -44,18 +44,18 @@ const StudentList = () => {
 
 
   useEffect(() => {
-  setCurrentPage(1);
-}, [searchTerm]);
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   const filteredStudents = getStudentDetail.filter((student) => {
-    const searchValue = searchTerm.toLowerCase();
+    const searchValue = (searchTerm || "").toLowerCase();
     return (
-      student.student_name.toLowerCase().includes(searchValue) ||
-      student.father_name.toLowerCase().includes(searchValue) ||
-      student.city.toLowerCase().includes(searchValue) ||
-      student.state.toLowerCase().includes(searchValue) ||
-      student.class.toLowerCase().includes(searchValue) ||
-      String(student.session_year).includes(searchValue)
+      student.student_name?.toLowerCase().includes(searchValue) ||
+      student.father_name?.toLowerCase().includes(searchValue) ||
+      student.city?.toLowerCase().includes(searchValue) ||
+      student.state?.toLowerCase().includes(searchValue) ||
+      student.class?.toLowerCase().includes(searchValue) ||
+      String(student.session_year)?.includes(searchValue)
     );
   });
 
@@ -97,9 +97,8 @@ const StudentList = () => {
       return (
         <button
           key={i}
-          className={`px-1.5  rounded-full mx-0.5 ${
-            currentPage === number ? "bg-[#1EA3DC] text-white" : "bg-white text-[#1EA3DC]"
-          }`}
+          className={`px-1.5  rounded-full mx-0.5 ${currentPage === number ? "bg-[#1EA3DC] text-white" : "bg-white text-[#1EA3DC]"
+            }`}
           onClick={() => setCurrentPage(number)}
         >
           {number}
@@ -108,9 +107,9 @@ const StudentList = () => {
     });
   };
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }, [currentPage]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
 
   return (

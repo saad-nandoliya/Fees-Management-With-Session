@@ -53,7 +53,7 @@ const StudentInfo = () => {
       ],
     },
     {
-      icon: "fa-book",
+      icon: "fa-graduation-cap",
       title: "Academics",
       items: [
         { name: "Promote Student", path: "promote-admission" },

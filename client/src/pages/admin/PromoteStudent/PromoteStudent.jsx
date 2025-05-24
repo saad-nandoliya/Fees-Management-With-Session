@@ -5,6 +5,7 @@ import { useSessionClass } from '../../../context/YearsAndClasses/YearsAndClasse
 const PromoteStudent = () => {
     const { sessionYear, classes, sectionList } = useSessionClass();
     const [filter, setFilter] = useState({
+        session_year: '',
         class_id: '',
         section_id: '',
     });
@@ -29,14 +30,14 @@ const PromoteStudent = () => {
     };
 
     const handleSearch = () => {
-        if (!filter.class_id || !filter.section_id) {
-            setError('Class aur section select karo');
+        if (!filter.session_year || !filter.class_id || !filter.section_id) {
+            setError('Session, class, and section are required.');
             return;
         }
         setError('');
         axios
             .get('http://localhost:5000/students', {
-                params:filter,
+                params: filter,
             })
             .then((response) => {
                 setStudents(response.data);
@@ -44,7 +45,7 @@ const PromoteStudent = () => {
                 setError('');
             })
             .catch((err) => {
-                setError('Students fetch karne mein error: ' + (err.response?.data?.message || err.message));
+                setError('Error fetching students: ' + (err.response?.data?.message || err.message));
                 setStudents([]);
             });
     };
@@ -67,11 +68,11 @@ const PromoteStudent = () => {
 
     const handlePromote = () => {
         if (selectedStudents.length === 0) {
-            setError('Kam se kam ek student select karo');
+            setError('At least one student must be selected.');
             return;
         }
         if (!promotion.new_session_year || !promotion.new_class_id || !promotion.new_section_id) {
-            setError('Naya session, class, aur section select karo');
+            setError('New session, class, and section are required.');
             return;
         }
 
@@ -85,11 +86,15 @@ const PromoteStudent = () => {
             .then((response) => {
                 setSuccess(response.data.message);
                 setError('');
+                // Clear selections, filters, and promotion dropdowns
                 setSelectedStudents([]);
-                handleSearch();
+                setFilter({ session_year: '', class_id: '', section_id: '' });
+                setPromotion({ new_session_year: '', new_class_id: '', new_section_id: '' });
+                // Hide table by clearing students
+                setStudents([]);
             })
             .catch((err) => {
-                setError('Promote karne mein error: ' + (err.response?.data?.message || err.message));
+                setError('Error promoting students: ' + (err.response?.data?.message || err.message));
                 setSuccess('');
             });
     };
@@ -275,9 +280,8 @@ const PromoteStudent = () => {
                                 ))}
                             </tbody>
                         </table>
-                        <div className="flex justify-end py-2 border-t-1 border-gray-200 ">
-                           
-                                <button
+                        <div className="flex justify-end py-2 border-t-1 border-gray-200">
+                            <button
                                 onClick={handlePromote}
                                 className="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded mt-1"
                             >
